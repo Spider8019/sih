@@ -1,0 +1,201 @@
+body {
+    font-family: Noto Sans Display;
+}
+
+:root {
+    --base-color: rgb(245, 158, 11);
+    --base-color-green:rgb(0, 193, 0);
+    --cooperate-theme-based-color: black;
+    --calendar-unit-bg: #eee;
+    /* --sidebar-nav: linear-gradient(white, rgba(255, 255, 255, 0.87), transparent), url('/static/pages/canva1.png'); */
+}
+
+.gradientText {
+    background: -webkit-linear-gradient(var(--base-color), #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.custom_scrollbar::-webkit-scrollbar {
+    width: 0px;
+}
+
+.dark {
+    --base-color: #92400e;
+    --cooperate-theme-based-color: white;
+    --calendar-unit-bg: black;
+    /* --sidebar-nav: linear-gradient(black, rgba(0, 0, 0, 0.87), transparent), url('/static/pages/canva1bg.png'); */
+}
+
+@media only screen and (max-width:640px) {
+    body {
+        user-select: none;
+    }
+}
+
+@font-face {
+    font-family: 'signature';
+    src: url('/static/fonts/signatureAmsterdam.ttf')
+}
+
+
+
+
+#nprogress .bar {
+    background: linear-gradient(45deg,var(--base-color),rgb(243, 243, 243),var(--base-color-green));
+    height: 5px;
+}
+
+.signature {
+    font-family: "signature";
+}
+
+
+.basicButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background: white;
+    border: 2px solid black;
+    transition: all 0.3s ease;
+}
+
+.basicButton:hover {
+    border: 2px solid white;
+    background: var(--base-color);
+    color: white;
+}
+
+.basicDarkButton {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(45deg,var(--base-color),rgb(243, 243, 243),var(--base-color-green));
+    box-shadow:0px 10px 10px rgba(167, 167, 167, 0.357);   
+    color: black;
+    border: 1px solid var(--base-color);
+    transition: all 0.3s ease;
+}
+
+.festBlog::first-letter {
+    float: left;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: bold;
+    margin-right: 9px;
+}
+
+/* रूठे यार को मनाना है, इस बार गिले शिकवे मिटाना है, तो आ गया होली का त्योहार, आओ गले मिलकर करें नई शुरुआत. होली 2022 की हार्दिक शुभकामनाएं! */
+.dark .basicDarkButton {
+    border-color: var(--base-color);
+    background: var(--base-color);
+}
+
+.basicDarkButton:hover {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.264);
+}
+
+.basicDarkButton:active {
+    transform: scale(0.98);
+}
+
+.basicDarkButtonInvert {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid black;
+}
+
+.standardInput {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.textarea {
+    border: none;
+    min-height: 5rem;
+    height: fit-content;
+    resize: none;
+    width: 100%;
+    font-size: 1.25rem;
+    background: #eee;
+    padding: 0.5rem;
+}
+
+.MuiSelect-select {
+    padding: 0rem !important;
+    padding-left: 1rem !important;
+    font-size: 0.8rem !important;
+    background: linear-gradient(white, #ccc) !important;
+    min-width: 8rem !important;
+}
+
+.paper {
+    box-shadow: 5px 5px var(--base-color), 10px 10px red, 15px 15px rgb(0, 195, 255);
+}
+
+.MuiPagination-text {}
+
+.PNFContainer {
+    height: calc(100vh - 10rem);
+    width: 100%;
+    /* background: url("../public/static/pages/404.png") no-repeat bottom; */
+    background-size: cover;
+}
+
+.playerLeftContainer {
+    background-size: contain !important;
+    /* background: url('../public/static/pages/player.png') no-repeat left; */
+}
+
+@media only screen and (max-width:640px) {
+    .playerLeftContainer {
+        height: 40vh;
+        background: linear-gradient(#f59e0b, red);
+        background-position: center;
+    }
+
+    .paper {
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.164);
+    }
+}
+
+.svgborder{
+    outline-offset: -2px;
+    outline:2px solid #ff5e00;
+    color:rgb(16, 195, 0);
+    padding:0.5rem 2rem;
+    position:relative;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.svgborder::after{
+    position:Absolute;
+    top:-0.5px;
+    right:-0.5px;
+    width:15px;
+    height:15px;
+    background:rgb(255, 255, 255);
+    content:"";
+    clip-path: polygon(0 0,100% 0,100% 100%);
+
+}
+.svgborder::before{
+    position:Absolute;
+    top:0;
+    right:0;
+    width:16.82px;
+    height:16.82px;
+    background:#ff5e00;
+    content:"";
+    clip-path: polygon(0 0,100% 0,100% 100%);
+}

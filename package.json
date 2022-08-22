@@ -9,12 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@esri/react-arcgis": "^5.2.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.1",
+    "axios": "^0.27.2",
+    "esri-loader": "^3.6.0",
+    "framer-motion": "^7.2.0",
+    "lodash": "^4.17.21",
     "next": "12.2.5",
+    "next-auth": "^4.10.3",
+    "next-themes": "^0.2.0",
+    "nprogress": "^0.2.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-device-detect": "^2.2.2",
+    "react-dom": "18.2.0",
+    "react-toastify": "^9.0.8"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.8",
     "eslint": "8.22.0",
-    "eslint-config-next": "12.2.5"
+    "eslint-config-next": "12.2.5",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }
