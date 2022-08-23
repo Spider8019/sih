@@ -6,7 +6,7 @@ const nextConfig = {
   devIndicators: {
     buildActivity: false
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
 }
 

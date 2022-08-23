@@ -4,7 +4,7 @@ import Footer from '../global/Footer';
 import Head from "next/head"
 
 const Layout = ({ children }) => {
-    return <div style={{overflow:"hidden"}}>
+    return <div >
         <Head>
             <meta name="description" content="Login Page" />
             <link rel="shortcut icon" href="/static/withOutBgLogo.png" />

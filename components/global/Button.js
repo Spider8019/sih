@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useState } from 'react'
 import { pageFramer } from '../../globalsetups/defaultValues'
 import { useRouter } from 'next/router'
-import Link from "next/Link"
+import Link from "next/link"
 const Button = ({string,url}) => {
 
     const router = useRouter();

@@ -6,9 +6,9 @@ import { useRouter } from 'next/router'
 
 //import Forecast from '../dialogs/Forecast'
 import _ from "lodash"
-import { useSession, signIn } from "next-auth/react"
+// import { useSession, signIn } from "next-auth/react
 import { Avatar, IconButton } from '@mui/material'
-import { defaultOptions } from '../../globalSetups/defaultValues'
+import { defaultOptions } from '../../globalsetups/defaultValues'
 import { isMobile, isBrowser } from 'react-device-detect';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Divider from '@mui/material/Divider';
@@ -23,7 +23,7 @@ import Button from "./Button"
 const Navbar = () => {
   // let { t } = useTranslation()
   const router = useRouter()
-  const { data: session, status } = useSession()
+
   const { theme, setTheme } = useTheme()
 
 
@@ -61,18 +61,18 @@ const Navbar = () => {
             className='px-4 sm:px-2 p-2 grid items-center  border-r-2 border-white'>Home</a>
         </Link>
       </li>
-      <li className={router.pathname == "/about" ? "sm:bg-amber-600 bg-amber-500" : ""}>
-        <Link href="/about" >
+      <li className={router.pathname == "/map" ? "sm:bg-amber-600 bg-amber-500" : ""}>
+        <Link href="/map" >
           <a
             onClick={redirectLink}
             className='px-4 sm:px-2 p-2 grid items-center  border-r-2 border-white'>Access GIS</a>
         </Link>
       </li>
-      <li className={router.pathname.includes("/tourism") ? "sm:bg-amber-600 bg-amber-500" : ""}>
-        <Link href="/tour">
+      <li className={router.pathname.includes("/team") ? "sm:bg-amber-600 bg-amber-500" : ""}>
+        <Link href="/team">
           <a
             onClick={redirectLink}
-            className='px-4 sm:px-2 p-2 grid items-center  border-r-2 border-white'>Tourism</a>
+            className='px-4 sm:px-2 p-2 grid items-center  border-r-2 border-white'>Team</a>
         </Link>
       </li>
     </ul>
@@ -154,7 +154,7 @@ const Navbar = () => {
   }
   if (isBrowser) {
     return (
-      <div className='flex flex-col dark:bg-black bg-amber-500 p-4 sm:p-0 sm:bg-white'>
+      <div className='dark:bg-black flex flex-col  bg-amber-500 p-4 sm:p-0 sm:bg-white dark:bg-black'>
         <div className="sm:px-10 sm:py-4 flex justify-between  items-center">
           <div className='flex items-center'>
             <div className="w-16 h-16">
@@ -179,30 +179,6 @@ const Navbar = () => {
                   <DarkModeTwoToneIcon className="dark:text-white" />
               }
             </IconButton>
-            {
-              (!session && status === 'unauthenticated')
-              &&
-              <>
-              <Button string="Login" url="/login" />
-              </>
-            }
-            {
-              session
-              &&
-              <Link
-                passHref={true}
-                href="/dashboard">
-                <motion.a
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Avatar
-                    className="ml-2 cursor-pointer"
-                  >
-                    <Image src={session.user.image} alt={session.user.name} layout="fill" objectFit='cover' />
-                  </Avatar>
-                </motion.a>
-              </Link>
-            }
           </div>
         </div>
         <div className="hidden sm:block">
@@ -222,3 +198,9 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
+
+// localhost:8000/routepred/Ships_latest/  -- get request -- will get latest locaiton of all ships. 
+// localhost:8000/routepred/Ship_on_time_stamp -- post request -- timestamp == 2016-11-24T17:27:51Z
+// localhost:8000/routepred/Path_of_ship/  post request -- mmsi number -- you will get the data for a particualr ship. 
