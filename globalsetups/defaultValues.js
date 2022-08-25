@@ -26,3 +26,44 @@ export const pageFramer = {
         }
     }
 }
+
+export const xEntry={
+    initial:{
+        x:-100,
+        opacity:0,
+    },
+    animate:{
+        x:0,
+        opacity:1,
+        transition:{
+            duration:0.3
+        }
+    }
+}
+export const xPositiveEntry={
+    initial:{
+        x:100,
+        opacity:0,
+    },
+    animate:{
+        x:0,
+        opacity:1,
+        transition:{
+            duration:0.3
+        }
+    }
+}
+export const opacityEntry={
+    initial:{
+        opacity:0,
+    },
+    animate:{
+        x:0,
+        opacity:1,
+        transition:{
+            delay:0.5,
+            delayChildren:0.3,
+            duration:0.3
+        }
+    }
+}

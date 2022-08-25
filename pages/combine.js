@@ -22,6 +22,8 @@ const Route = () => {
           "esri/Graphic",
           "esri/geometry/Point",
           "esri/core/watchUtils",
+          "esri/layers/CSVLayer",
+          "esri/widgets/Legend"
         ],
         {
           css: true,

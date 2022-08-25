@@ -9,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const NestedLayout = Component.Layout || EmptyLayout;
   const router = useRouter();

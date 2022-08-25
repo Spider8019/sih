@@ -42,7 +42,6 @@ const Button = ({string,url}) => {
             <Link href={url}>
                 <motion.a
                     className="basicDarkButton cursor-pointer"
-                    whileHover={{ scale: 1.1 }}
                     variants={container}
                     initial="hidden"
                     animate="show"

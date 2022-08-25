@@ -53,4 +53,5 @@ export const gettingPathOfAParticularShip=(obj)=>callApiAndReturnDataPost(obj,"/
 export const gettingShipByCountry=(obj)=>callApiAndReturnDataPost(obj,"/routepred/ship_by_country/")
 export const gettingShipByLocation=(obj)=>callApiAndReturnDataPost(obj,"/routepred/ship_in_region/")
 export const gettingPredictedRoute=(obj)=>callApiAndReturnDataPost(obj,"/routepred/Route_pred_10/");
+export const gettingFishingTrends=(obj)=>callApiAndReturnDataPost(obj,"/routepred/Route_pred_10/");
 // ship_by_country - post - country

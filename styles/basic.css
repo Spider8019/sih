@@ -120,15 +120,6 @@ body {
   width:100vw;
   background:#eee;
 }
-.mapLayer::before{
-  content:'GIS is processing.';
-  position:absolute;
-  color:#f59e0b;
-  font-size:1rem;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-}
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
@@ -251,8 +242,8 @@ input[type="file"] {
 }
  .cube, .cube * {
 	 position: absolute;
-	 width: 151px;
-	 height: 151px;
+	 width: 20vh;
+	 height: 20vh;
 }
  .sides {
 	 animation: rotate 3s ease infinite;
@@ -443,9 +434,8 @@ input[type="file"] {
  .text {
 	 margin-top: 450px;
 	 color: var(--base-color);
-	 font-size: 1.5rem;
-	 width: 100%;
-	 font-weight: 600;
+	 font-size: 1.2rem;
+	 /* width: 100%; */
 	 text-align: center;
 }
 .loadingMap {
@@ -453,5 +443,6 @@ input[type="file"] {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-right: -50%;
+	transform:translate(-50%,-50%);
+	/* margin-right: -50%; */
   }

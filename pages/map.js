@@ -5,6 +5,8 @@ import Drawer from "../components/map/Drawer";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Loader from "../components/global/Loader";
+import Heatmap from "../components/heatmap"
+
 
 export default function Home({ ...props }) {
   const MapElement = useRef(null);
@@ -112,6 +114,7 @@ export default function Home({ ...props }) {
           </div>
         </div>
       </div>
+     
     </div>
   );
 }

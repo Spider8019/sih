@@ -57,18 +57,18 @@ const Tour = () => {
           },
           {
             src: "dhiraj.jpeg",
-            name: "Dheeraj Pimparkar",
-            post: "Machine Learning",
+            name: "Dhiraj Pimparkar",
+            post: "Lead ML Engineer",
           },
           {
             src: "parwaan.jpeg",
             name: "Parwaan Virk",
-            post: "Backend Developer",
+            post: "Lead Backend Developer",
           },
           {
             src: "aman.jpeg",
             name: "Aman Pratap Singh",
-            post: "Frontend Developer",
+            post: "Lead Frontend Developer",
           },
           {
             src: "shreyas.jpeg",
