@@ -1,9 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { loadModules } from "esri-loader";
-import {
-  gettingLatestShip,
-  gettingShipLocationAtInstanceOfTime,
-} from "../globalsetups/api";
+import { gettingLatestShip } from "../globalsetups/api";
 import Drawer from "../components/map/Drawer";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -11,14 +8,11 @@ import Loader from "../components/global/Loader";
 
 export default function Home({ ...props }) {
   const MapElement = useRef(null);
-
-
   const router = useRouter();
+
   let res;
-  console.log(router.query);
   useEffect(() => {
     let view;
-    let { timestamp } = router.query;
     (async () => {
       loadModules(
         [
@@ -26,13 +20,15 @@ export default function Home({ ...props }) {
           "esri/WebMap",
           "esri/Graphic",
           "esri/geometry/Point",
+          "esri/core/watchUtils",
         ],
         {
           css: true,
         }
-      ).then(async ([MapView, WebMap, Graphic, Point]) => {
+      ).then(async ([MapView, WebMap, Graphic, Point, watchUtils]) => {
         res = await gettingLatestShip({});
-        console.log(res)
+        console.log(res);
+
         const webmap = new WebMap({
           basemap: "topo-vector",
         });
@@ -74,6 +70,16 @@ export default function Home({ ...props }) {
           });
           view.graphics.add(graphic_symbol);
         });
+        watchUtils.whenTrue(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "block";
+        });
+
+        // Hide the loading indicator when the view stops updating
+        watchUtils.whenFalse(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "none";
+        });
       });
     })();
 
@@ -90,18 +96,22 @@ export default function Home({ ...props }) {
       <Head>
         <title>Access GIS</title>
       </Head>
-        <div className="flex relative">
-          <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
-            <Drawer />
-          </div>
-          <div className="w-full">
-            <div
-              className="mapLayer"
-              style={{ height: "calc(100vh - 136px)", width: "100vw" }}
-              ref={MapElement}
-            ></div>
+      <div className="flex relative">
+        <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
+          <Drawer />
+        </div>
+        <div className="w-full">
+          <div
+            className="mapLayer relative"
+            style={{ height: "calc(100vh - 136px)", width: "100vw" }}
+            ref={MapElement}
+          >
+            <div id="loaderElement" className="loadingMap">
+              <Loader />
+            </div>
           </div>
         </div>
+      </div>
     </div>
   );
 }

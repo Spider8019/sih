@@ -15,12 +15,14 @@
     "@esri/react-arcgis": "^5.2.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.1",
+    "aws-sdk": "^2.1201.0",
     "axios": "^0.27.2",
     "country-data-list": "^1.2.2",
     "country-list": "^2.2.0",
     "esri-loader": "^3.6.0",
     "framer-motion": "^7.2.0",
     "lodash": "^4.17.21",
+    "nanoid": "^4.0.0",
     "next": "^12.2.5",
     "next-themes": "^0.2.0",
     "nprogress": "^0.2.0",
@@ -31,7 +33,8 @@
     "react-leaflet": "^4.0.2",
     "react-leaflet-heatmap-layer": "^2.0.0",
     "react-spreadsheet": "^0.7.7",
-    "react-toastify": "^9.0.8"
+    "react-toastify": "^9.0.8",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

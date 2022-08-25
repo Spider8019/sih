@@ -36,6 +36,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             name="viewport"
             content="width=device-width,initial-scale=1.0"
           />
+          <title>tinkerchild - IITJAMMU</title>
           <meta type="keyword" content="SIH HACKATHON" />
         </Head>
         <ToastContainer />

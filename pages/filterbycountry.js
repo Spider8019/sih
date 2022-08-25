@@ -30,9 +30,9 @@ export default function Home({ ...props }) {
         res = await gettingShipByCountry({
           country,
         });
-        if(res){
-          isLoading(false)
-        }
+        // if(res){
+        //   isLoading(false)
+        // }
         const webmap = new WebMap({
           basemap: "topo-vector",
         });
@@ -68,15 +68,13 @@ export default function Home({ ...props }) {
             symbol,
             attributes: {
               Name: `<b>MMSI ${item.ship.mmsi}</b>`,
-              Description: `<div><b>Country: ${item.country}<b>Timestamp: ${item.timestamp}<br/>Longitude: ${item.longitude}<br/>Latitude: ${item.latitude}</b><div style="margin-top:2rem"><a class="basicDarkButton" href="http://localhost:3000/route?mmsi=${item.ship.mmsi}">Route</a><a class="basicDarkButton" style="margin-left:1rem;" href="/route/${item.ship.mmsi}">Predict</a></div></div></div>`,
+              Description: `<div><b>Country: ${item.country}<br/>Timestamp: ${item.timestamp}<br/>Longitude: ${item.longitude}<br/>Latitude: ${item.latitude}</b><div style="margin-top:2rem"><a class="basicDarkButton" href="http://localhost:3000/route?mmsi=${item.ship.mmsi}">Route</a><a class="basicDarkButton" style="margin-left:1rem;" href="/route/${item.ship.mmsi}">Predict</a></div></div></div>`,
             },
             popupTemplate,
           });
           view.graphics.add(graphic_symbol);
         });
       });
-
-      // }
     })();
 
     return () => {
@@ -92,9 +90,9 @@ export default function Home({ ...props }) {
       <Head>
         <title>Ship by Country - SIH</title>
       </Head>
-      {loading ? (
+      {/* {loading ? (
         <Loader />
-      ) : (
+      ) : ( */}
         <div className="flex relative">
           <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
             <Drawer />
@@ -107,7 +105,7 @@ export default function Home({ ...props }) {
             ></div>
           </div>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

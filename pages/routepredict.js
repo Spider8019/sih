@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { loadModules } from "esri-loader";
 import Head from "next/head";
 import Loader from "../components/global/Loader";
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 
 const Route = () => {
   const router = useRouter();
@@ -169,19 +170,23 @@ const Route = () => {
         <title>Route Predict Ship GIS</title>
       </Head>
 
-      {loading ? (
-        <Loader text={"Machine Learning model is working"}/>
-      ) : (
-        <div className="flex">
-          <div className="w-full">
-            <div
-              className="mapLayer"
-              style={{ height: "calc(100vh - 136px)", width: "100vw" }}
-              ref={MapElement}
-            ></div>
-          </div>
+      <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
+        <button 
+            
+        >
+          <LocalFireDepartmentIcon />
+        </button>
+      </div>
+      <div className="flex">
+        <div className="w-full">
+          <div
+            className="mapLayer"
+            style={{ height: "calc(100vh - 136px)", width: "100vw" }}
+            ref={MapElement}
+          ></div>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </div>
   );
 };

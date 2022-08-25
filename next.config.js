@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images:{
-    domains:["sih.gov.in"]
+    domains:["sih.gov.in","i.stack.imgur.com"]
   },
   devIndicators: {
     buildActivity: false

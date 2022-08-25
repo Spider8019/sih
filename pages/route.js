@@ -3,16 +3,14 @@ import { gettingPathOfAParticularShip } from "../globalsetups/api";
 import { useRouter } from "next/router";
 import { loadModules } from "esri-loader";
 import Head from "next/head";
-import Xyz from "../components/global/Xyz"
+import Loader from "../components/global/Loader";
 
 const Route = () => {
   const router = useRouter();
   const MapElement = useRef(null);
   const [latlog, setLatlog] = useState([]);
-  
+
   useEffect(() => {
-
-
     let view;
     const { mmsi } = router.query;
     (async () => {
@@ -22,21 +20,22 @@ const Route = () => {
           "esri/WebMap",
           "esri/Graphic",
           "esri/geometry/Point",
+          "esri/core/watchUtils",
         ],
         {
           css: true,
         }
-      ).then(async ([MapView, WebMap, Graphic, Point]) => {
+      ).then(async ([MapView, WebMap, Graphic, Point, watchUtils]) => {
         let res = await gettingPathOfAParticularShip({
           mmsi,
         });
-  
+
         const webmap = new WebMap({
           basemap: "topo-vector",
         });
 
         if (res.length > 0) {
-          setLatlog(res.map(item=>[item.longitude,item.latitude,"1"]))
+          setLatlog(res.map((item) => [item.longitude, item.latitude, "1"]));
           var view = new MapView({
             map: webmap,
             center: [res[0] && res[0].longitude, res[0] && res[0].latitude],
@@ -114,7 +113,16 @@ const Route = () => {
           view.graphics.add(polylineGraphic);
         }
 
-        //polyline.addPath([polyline.getPoint(0, 0)]);
+        watchUtils.whenTrue(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "block";
+        });
+
+        // Hide the loading indicator when the view stops updating
+        watchUtils.whenFalse(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "none";
+        });
       });
     })();
 
@@ -131,19 +139,20 @@ const Route = () => {
       <Head>
         <title>Route Ship GIS</title>
       </Head>
-     
+
       <div className="flex">
         <div className="w-full">
           <div
             className="mapLayer"
             style={{ height: "calc(100vh - 136px)", width: "100vw" }}
             ref={MapElement}
-          ></div>
-          {console.log(latlog)}
+          >
+            <div id="loaderElement" className="loadingMap">
+              <Loader />
+            </div>
+          </div>
         </div>
       </div>
-     
-
     </div>
   );
 };

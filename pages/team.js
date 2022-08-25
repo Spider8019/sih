@@ -50,7 +50,11 @@ const Tour = () => {
         exit="exit"
         className="p-20 grid grid-cols-3"
       >
-        {[
+        {[{
+            src: "bhavyta.jpeg",
+            name: "Bhavyta",
+            post: "Team Leader",
+          },
           {
             src: "dhiraj.jpeg",
             name: "Dheeraj Pimparkar",
@@ -67,18 +71,13 @@ const Tour = () => {
             post: "Frontend Developer",
           },
           {
-            src: "dhiraj.jpeg",
-            name: "Dheeraj Pimparkar",
+            src: "shreyas.jpeg",
+            name: "Shreyas Chatterjee",
             post: "Machine Learning",
           },
           {
-            src: "dhiraj.jpeg",
-            name: "Dheeraj Pimparkar",
-            post: "Machine Learning",
-          },
-          {
-            src: "dhiraj.jpeg",
-            name: "Dheeraj Pimparkar",
+            src: "unnamed.png",
+            name: "Mahendra Gurve",
             post: "Machine Learning",
           },
         ].map((item, index) => {
