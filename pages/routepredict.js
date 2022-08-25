@@ -49,6 +49,7 @@ const Route = () => {
             paths: [
               res
                 .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
+                .slice(0,res.length-10)
                 .map((item) => [item.longitude, item.latitude]),
             ],
           };
@@ -134,7 +135,7 @@ const Route = () => {
           };
           res
             .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
-            .slice(1990, 2000)
+            .slice(res.length-10, res.length-1)
             .forEach((item) => {
               var point_symbol = new Point({
                 longitude: item.longitude,

@@ -94,7 +94,7 @@ export default function Home({ ...props }) {
   return (
     <div>
       <Head>
-        <title>Access GIS</title>
+        <title>Ship by Timestamp</title>
       </Head>
       <div className="flex relative">
         <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">

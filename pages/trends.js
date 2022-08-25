@@ -30,6 +30,12 @@ const Trends = () => {
             }
         }
     }
+
+// routepred/fishing_trends_all/
+
+// fish_type: "trollers"
+// start_ts:
+// end_ts:
     const item = {
         hidden: {
             opacity: 0
@@ -47,7 +53,7 @@ const Trends = () => {
             notifywarn("details are missing")
             return
         }
-        router.replace(`/trendsresult?timestampstart=${startDate}T${startTime}Z&timestampend=${endDate}T${endTime}`)
+        router.replace(`/trendsresult?start_ts=${startDate}T${startTime}Z&end_ts=${endDate}T${endTime}&fish_type=trollers`)
     }
     return (
         <div className="grid place-items-center h-[calc(100vh - 136px)]"

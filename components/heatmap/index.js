@@ -34,7 +34,7 @@ export default function Home({arrayList }) {
     //   speed: 2.7000000476999997
     //   timestamp: "2016-10-08T07:37:48"
     const ws = utils.json_to_sheet(
-      arrayList.map(item=>{return {distance_from_port:item.distance_from_port,course:item.course,id:item.id,mag:1,latitude:item.latitude,longitude:item.longitude}})
+      arrayList.map(item=>{return {mag:1,latitude:item.latitude,longitude:item.longitude}})
     );
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
     const excelBuffer = XLSX.write(wb, { bookType: "csv", type: "array" });
@@ -58,8 +58,8 @@ export default function Home({arrayList }) {
           const url = data.Location;
 
           const template = {
-            title: "Course {course}",
-            content: "Id {id}, Distance from shore {distance_from_port}",
+            title: "Course",
+            content: "Id ",
           };
 
           const renderer = {
@@ -79,7 +79,7 @@ export default function Home({arrayList }) {
               { color: "#fc2403", ratio: 0.913 },
               { color: "#ff0000", ratio: 1 },
             ],
-            maxDensity: 0.01,
+            maxDensity: 0.1,
             minDensity: 0,
           };
 
@@ -119,7 +119,7 @@ export default function Home({arrayList }) {
           const view = new MapView({
             container: MapElement.current,
             center: [-138, 30],
-            zoom: 2,
+            zoom: 5,
             map: map,
           });
 

@@ -5,6 +5,7 @@ import Drawer from "../components/map/Drawer";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Loader from "../components/global/Loader";
+import Circle from "@arcgis/core/geometry/Circle";
 
 export default function Home({ ...props }) {
   const MapElement = useRef(null);
@@ -46,6 +47,26 @@ export default function Home({ ...props }) {
             container: MapElement.current,
           });
 
+          const circleGeometry = new Circle({
+            center: [res.latitude, res.longitude],
+            geodesic: true,
+            numberOfPoints: 100,
+            radius: 2*res.radius,
+            radiusUnit: "kilometers",
+          });
+          view.graphics.add(
+            new Graphic({
+              geometry: circleGeometry,
+              symbol: {
+                type: "simple-fill",
+                color: [252, 136, 3, 0.2],
+                outline: {
+                  width: 3,
+                  color: "orange",
+                },
+              },
+            })
+          );
           let symbol = {
             type: "simple-marker",
             style: "circle",
@@ -94,7 +115,7 @@ export default function Home({ ...props }) {
   return (
     <div>
       <Head>
-        <title>Ship by Country - SIH</title>
+        <title>Ship by Region - SIH</title>
       </Head>
       <div className="flex relative">
         <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
