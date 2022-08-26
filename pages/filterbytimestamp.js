@@ -14,9 +14,9 @@ export default function Home({ ...props }) {
   const [loading, isLoading] = useState(true);
   const router = useRouter();
   let res;
-  
+
   useEffect(() => {
-    const {timestamp}=router.query
+    const { timestamp } = router.query;
     let view;
     (async () => {
       //setLatestData(res);
@@ -27,13 +27,14 @@ export default function Home({ ...props }) {
           "esri/WebMap",
           "esri/Graphic",
           "esri/geometry/Point",
+          "esri/core/watchUtils",
         ],
         {
           css: true,
         }
-      ).then(async ([MapView, WebMap, Graphic, Point]) => {
+      ).then(async ([MapView, WebMap, Graphic, Point, watchUtils]) => {
         res = await gettingShipLocationAtInstanceOfTime({
-          timestamp
+          timestamp,
         });
         console.log(res);
         isLoading(false);
@@ -78,8 +79,17 @@ export default function Home({ ...props }) {
           });
           view.graphics.add(graphic_symbol);
         });
+        watchUtils.whenTrue(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "block";
+        });
+  
+        // Hide the loading indicator when the view stops updating
+        watchUtils.whenFalse(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "none";
+        });
       });
-
       // }
     })();
 
@@ -105,7 +115,11 @@ export default function Home({ ...props }) {
             className="mapLayer"
             style={{ height: "calc(100vh - 136px)", width: "100vw" }}
             ref={MapElement}
-          ></div>
+          >
+            <div id="loaderElement" className="loadingMap">
+              <Loader text="Fetching data and initiating the GIS" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

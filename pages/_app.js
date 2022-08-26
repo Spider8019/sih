@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           />
           <title>tinkerchild - IITJAMMU</title>
           <meta type="keyword" content="SIH HACKATHON" />
+          <link rel="shortcut icon" href="../static/images/sih.png" />
         </Head>
         <ToastContainer />
         <AnimatePresence exitBeforeEnter>

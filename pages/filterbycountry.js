@@ -22,11 +22,12 @@ export default function Home({ ...props }) {
           "esri/WebMap",
           "esri/Graphic",
           "esri/geometry/Point",
+          "esri/core/watchUtils",
         ],
         {
           css: true,
         }
-      ).then(async ([MapView, WebMap, Graphic, Point]) => {
+      ).then(async ([MapView, WebMap, Graphic, Point, watchUtils]) => {
         res = await gettingShipByCountry({
           country,
         });
@@ -63,16 +64,27 @@ export default function Home({ ...props }) {
             latitude: item.latitude,
             spatialReference: { wkid: 3857 },
           });
+          console.log(item);
           var graphic_symbol = new Graphic({
             geometry: point_symbol,
             symbol,
             attributes: {
               Name: `<b>MMSI ${item.ship.mmsi}</b>`,
-              Description: `<div><b>Country: ${item.country}<br/>Timestamp: ${item.timestamp}<br/>Longitude: ${item.longitude}<br/>Latitude: ${item.latitude}</b><div style="margin-top:2rem"><a class="basicDarkButton" href="http://localhost:3000/route?mmsi=${item.ship.mmsi}">Route</a><a class="basicDarkButton" style="margin-left:1rem;" href="/route/${item.ship.mmsi}">Predict</a></div></div></div>`,
+              Description: `<div><b>Country: ${item.ship.country}<br/>Timestamp: ${item.timestamp}<br/>Longitude: ${item.longitude}<br/>Latitude: ${item.latitude}</b><div style="margin-top:2rem"><a class="basicDarkButton" href="http://localhost:3000/route?mmsi=${item.ship.mmsi}">Route</a><a class="basicDarkButton" style="margin-left:1rem;" href="/route/${item.ship.mmsi}">Predict</a></div></div></div>`,
             },
             popupTemplate,
           });
           view.graphics.add(graphic_symbol);
+        });
+        watchUtils.whenTrue(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "block";
+        });
+
+        // Hide the loading indicator when the view stops updating
+        watchUtils.whenFalse(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "none";
         });
       });
     })();
@@ -93,18 +105,22 @@ export default function Home({ ...props }) {
       {/* {loading ? (
         <Loader />
       ) : ( */}
-        <div className="flex relative">
-          <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
-            <Drawer />
-          </div>
-          <div className="w-full">
-            <div
-              className="mapLayer"
-              style={{ height: "calc(100vh - 136px)", width: "100vw" }}
-              ref={MapElement}
-            ></div>
+      <div className="flex relative">
+        <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
+          <Drawer />
+        </div>
+        <div className="w-full">
+          <div
+            className="mapLayer"
+            style={{ height: "calc(100vh - 136px)", width: "100vw" }}
+            ref={MapElement}
+          >
+            <div id="loaderElement" className="loadingMap">
+              <Loader text="Fetching data and initiating the GIS" />
+            </div>
           </div>
         </div>
+      </div>
       {/* )} */}
     </div>
   );

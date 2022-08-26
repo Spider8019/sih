@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { gettingPredictedRoute } from "../globalsetups/api";
+import {
+  gettingPredictedRoute,
+  gettingPathOfAParticularShip,
+} from "../globalsetups/api";
 import { useRouter } from "next/router";
 import { loadModules } from "esri-loader";
 import Head from "next/head";
 import Loader from "../components/global/Loader";
-import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 
 const Route = () => {
   const router = useRouter();
@@ -21,22 +23,26 @@ const Route = () => {
           "esri/WebMap",
           "esri/Graphic",
           "esri/geometry/Point",
+          "esri/core/watchUtils",
         ],
         {
           css: true,
         }
-      ).then(async ([MapView, WebMap, Graphic, Point]) => {
-        let res = await gettingPredictedRoute({
+      ).then(async ([MapView, WebMap, Graphic, Point, watchUtils]) => {
+        let result = await gettingPredictedRoute({
           mmsi,
         });
 
-        console.log(res);
+        let res = await gettingPathOfAParticularShip({
+          mmsi,
+        });
+
+        console.log(res, "adasdfasdfasdfasdfasdfasdfasdfa");
         const webmap = new WebMap({
           basemap: "topo-vector",
         });
 
         if (res.length > 0) {
-          isLoading(false);
           setLatlog(res.map((item) => [item.longitude, item.latitude, "1"]));
           var view = new MapView({
             map: webmap,
@@ -49,7 +55,7 @@ const Route = () => {
             paths: [
               res
                 .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
-                .slice(0,res.length-10)
+                .slice(0, res.length - 10)
                 .map((item) => [item.longitude, item.latitude]),
             ],
           };
@@ -118,6 +124,24 @@ const Route = () => {
             },
           });
           view.graphics.add(polylineGraphic);
+          const predictedLine= {
+            type: "polyline",
+            paths: [
+              res
+                .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
+                .slice( res.length - 10,res.length)
+                .map((item) => [item.longitude, item.latitude]),
+            ],
+          };
+          const polylinePredictedGraphic=new Graphic({
+            geometry:predictedLine,
+            symbold:{
+              type: "simple-line",
+              color: [226, 119, 40], // Orange
+              width: 5
+           }
+          })
+          view.graphics.add(polylinePredictedGraphic);
           let symbol = {
             type: "simple-marker",
             style: "circle",
@@ -135,7 +159,7 @@ const Route = () => {
           };
           res
             .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
-            .slice(res.length-10, res.length-1)
+            .slice(res.length - 10, res.length - 1)
             .forEach((item) => {
               var point_symbol = new Point({
                 longitude: item.longitude,
@@ -154,6 +178,16 @@ const Route = () => {
               view.graphics.add(graphic_symbol);
             });
         }
+        watchUtils.whenTrue(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "block";
+        });
+
+        // Hide the loading indicator when the view stops updating
+        watchUtils.whenFalse(view, "updating", function (evt) {
+          if (document.getElementById("loaderElement"))
+            document.getElementById("loaderElement").style.display = "none";
+        });
       });
     })();
 
@@ -171,20 +205,17 @@ const Route = () => {
         <title>Route Predict Ship GIS</title>
       </Head>
 
-      <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-2 shadow-2xl z-30">
-        <button 
-            
-        >
-          <LocalFireDepartmentIcon />
-        </button>
-      </div>
       <div className="flex">
         <div className="w-full">
           <div
-            className="mapLayer"
+            className="mapLayer relative"
             style={{ height: "calc(100vh - 136px)", width: "100vw" }}
             ref={MapElement}
-          ></div>
+          >
+            <div id="loaderElement" className="loadingMap">
+              <Loader text="Future 5 hour path prediction and GIS mapping. It may take several moments.." />
+            </div>
+          </div>
         </div>
       </div>
       {/* )} */}

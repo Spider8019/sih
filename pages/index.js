@@ -37,13 +37,22 @@ export default function Home() {
         priority={true}
         alt="Home Cover Image"
       />
-      <div className="absolute top-1/2 left-1/2 -translate-y-2/4 w-[50vw]">
+      <div className="absolute w-[30vw] top-1/2 left-1/2 -translate-y-2/4 w-[50vw] ">
         <p className="text-6xl">Smart India Hackathon</p>
         <p className="text-xl mt-4">
-          {" "}
           Smart India Hackathon is a nationwide initiative to provide students
           with a platform to solve some of the pressing problems
         </p>
+        <p className="text-sm mt-4 text-gray-400">
+          Many countries may not have robust marine fishery reporting mechanisms
+          at place and rely on self-reporting from the fishermen. Even with
+          fishermen willing to, this may not be suitable for country/EEZ level
+          studies especially in Asian context where thousands of smaller boats
+          operate rather than limited large corporate fishing vessels. It is
+          important for researchers, policy makers and security agencies alike
+          to know where these boats prefer to fish at what time of the year.
+        </p>
+
         <button
           onClick={() => router.replace("/map")}
           className="basicDarkButton mt-4"

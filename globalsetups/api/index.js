@@ -54,5 +54,6 @@ export const gettingShipByCountry=(obj)=>callApiAndReturnDataPost(obj,"/routepre
 export const gettingShipByLocation=(obj)=>callApiAndReturnDataPost(obj,"/routepred/ship_in_region/")
 export const gettingPredictedRoute=(obj)=>callApiAndReturnDataPost(obj,"/routepred/Route_pred_10/");
 export const gettingFishingTrends=(obj)=>callApiAndReturnDataPost(obj,"/routepred/fishing_trends_all/");
+// export const gettingFishingTrendsUsingTryCatch=(obj)=>callApiAndReturnDataPostTryCatch(obj,"/routepred/fishing_trends_all/")
 export const gettingFishingTrendsOfIndividual=(obj)=>callApiAndReturnDataPost(obj,"/routepred/fishing_trends/")
 // ship_by_country - post - country

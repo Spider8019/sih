@@ -24,11 +24,12 @@ export default function Home({ ...props }) {
             "esri/WebMap",
             "esri/Graphic",
             "esri/geometry/Point",
+            "esri/core/watchUtils",
           ],
           {
             css: true,
           }
-        ).then(async ([MapView, WebMap, Graphic, Point]) => {
+        ).then(async ([MapView, WebMap, Graphic, Point, watchUtils]) => {
           console.log(longitude, latitude, radius);
           res = await gettingShipByLocation({
             longitude_cn: longitude,
@@ -43,7 +44,7 @@ export default function Home({ ...props }) {
           var view = new MapView({
             map: webmap,
             center: [res.result[0].latitude, res.result[0].longitude],
-            zoom: 10,
+            zoom: 5 ,
             container: MapElement.current,
           });
 
@@ -51,7 +52,7 @@ export default function Home({ ...props }) {
             center: [res.latitude, res.longitude],
             geodesic: true,
             numberOfPoints: 100,
-            radius: 2*res.radius,
+            radius: 2 * res.radius,
             radiusUnit: "kilometers",
           });
           view.graphics.add(
@@ -98,6 +99,16 @@ export default function Home({ ...props }) {
             });
             view.graphics.add(graphic_symbol);
           });
+          watchUtils.whenTrue(view, "updating", function (evt) {
+            if (document.getElementById("loaderElement"))
+              document.getElementById("loaderElement").style.display = "block";
+          });
+
+          // Hide the loading indicator when the view stops updating
+          watchUtils.whenFalse(view, "updating", function (evt) {
+            if (document.getElementById("loaderElement"))
+              document.getElementById("loaderElement").style.display = "none";
+          });
         });
 
         // }
@@ -126,7 +137,11 @@ export default function Home({ ...props }) {
             className="mapLayer"
             style={{ height: "calc(100vh - 136px)", width: "100vw" }}
             ref={MapElement}
-          ></div>
+          >
+            <div id="loaderElement" className="loadingMap">
+              <Loader text="Obtaining data that will be placed into GIS" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

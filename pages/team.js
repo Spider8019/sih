@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { xEntry } from "../globalsetups/defaultValues";
 import Image from "next/image";
 const Tour = () => {
   const container = {
@@ -37,12 +38,18 @@ const Tour = () => {
   };
   return (
     <motion.div>
-      <div className="containerglitch mt-20">
-        <p className="glitch ">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+        className="containerglitch mt-20"
+      >
+        <motion.p variants={children} className="glitch ">
           #tinkerchild
-        </p>
-      </div>
-     {/* // <h1 className="text-8xl text-center font-bold mt-20">#tinkerchild</h1> */}
+        </motion.p>
+      </motion.div>
+      {/* // <h1 className="text-8xl text-center font-bold mt-20">#tinkerchild</h1> */}
       <motion.div
         variants={container}
         initial="hidden"
@@ -50,7 +57,8 @@ const Tour = () => {
         exit="exit"
         className="p-20 grid grid-cols-3"
       >
-        {[{
+        {[
+          {
             src: "bhavyta.jpeg",
             name: "Bhavyta",
             post: "Team Leader",
@@ -88,7 +96,13 @@ const Tour = () => {
               variants={children}
               className="flex items-center p-4 bg-[#eee] rounded-2xl m-8"
             >
-              <motion.div className="teamMember">
+              <motion.div
+                variants={xEntry}
+                animate="animate"
+                initial="initial"
+                exit="initial"
+                className="teamMember"
+              >
                 <Image
                   src={"/static/images/" + item.src}
                   height="100"
@@ -97,10 +111,16 @@ const Tour = () => {
                   alt="Dheeraj Pimparkar"
                 />
               </motion.div>
-              <div className="ml-8">
+              <motion.div
+                variants={xEntry}
+                animate="animate"
+                initial="initial"
+                exit="initial"
+                className="ml-8"
+              >
                 <p className="bold text-xl">{item.name}</p>
                 <p className="italic">{item.post}</p>
-              </div>
+              </motion.div>
             </motion.div>
           );
         })}

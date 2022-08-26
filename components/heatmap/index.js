@@ -14,7 +14,9 @@ import { uploadObject } from "../../globalsetups/aws";
 import { nanoid } from "nanoid";
 import _ from "lodash";
 
-export default function Home({arrayList }) {
+export default function Home({arrayList,centerLatitude="-138",
+  centerLongitude="30",
+  defaultZoom="5"}) {
   const MapElement = useRef(null);
   const [awsDetails, setAWSDetails] = useState("");
 
@@ -118,8 +120,8 @@ export default function Home({arrayList }) {
 
           const view = new MapView({
             container: MapElement.current,
-            center: [-138, 30],
-            zoom: 5,
+            center: [centerLatitude, centerLongitude],
+            zoom: defaultZoom,
             map: map,
           });
 
