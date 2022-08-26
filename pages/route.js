@@ -32,7 +32,7 @@ const Route = () => {
        });
  
        const webmap = new WebMap({
-         basemap: "topo-vector",
+         basemap: "satellite",
        });
  
        if (res.length > 0) {
@@ -99,7 +99,7 @@ const Route = () => {
                              {
                                type: "CIMSolidFill",
                                enable: true,
-                               color: [0, 10, 0, 255],
+                               color: [255, 255, 255, 255],
                              },
                            ],
                          },

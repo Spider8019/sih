@@ -39,7 +39,7 @@ const Route = () => {
 
         console.log(res, "adasdfasdfasdfasdfasdfasdfasdfa");
         const webmap = new WebMap({
-          basemap: "topo-vector",
+          basemap: "satellite",
         });
 
         if (res.length > 0) {

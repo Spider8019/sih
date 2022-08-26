@@ -39,7 +39,7 @@ export default function Home({ ...props }) {
           console.log("Adfasdfasdfadsfa");
           console.log(res);
           const webmap = new WebMap({
-            basemap: "topo-vector",
+            basemap: "satellite",
           });
           var view = new MapView({
             map: webmap,

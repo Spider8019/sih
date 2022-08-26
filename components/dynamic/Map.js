@@ -10,7 +10,7 @@ const Esri = ({ height = "calc(100vh - 136px)", list = [] }) => {
         <div style={{ height: height, width: "100%" }}
         >   
             <Map
-                mapProperties={{ basemap: "topo-vector" }}
+                mapProperties={{ basemap: "satellite" }}
                 viewProperties={{
                     center: [-118.821527826096, 34.0139576938577],
                     zoom: 10

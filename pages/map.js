@@ -38,7 +38,7 @@ export default function Home({ ...props }) {
           const webmap = new WebMap({
             //basemap: "satellite"
             // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
-            basemap: "topo-vector",
+            basemap: "satellite",
           });
           var view = new MapView({
             map: webmap,

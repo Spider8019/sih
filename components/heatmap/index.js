@@ -114,7 +114,7 @@ export default function Home({arrayList,centerLatitude="-138",
           });
 
           const map = new Map({
-            basemap: "topo-vector",
+            basemap: "satellite",
             layers: [layer],
           });
 

@@ -35,7 +35,7 @@ export default function Home({ ...props }) {
         //   isLoading(false)
         // }
         const webmap = new WebMap({
-          basemap: "topo-vector",
+          basemap: "satellite",
         });
         var view = new MapView({
           map: webmap,
